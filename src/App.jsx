@@ -1,8 +1,8 @@
-import Map from "./component/Map";
+import Maps from "./component/Maps";
 function App() {
   return (
     <div>
-      <Map />
+      <Maps />
     </div>
   );
 }
