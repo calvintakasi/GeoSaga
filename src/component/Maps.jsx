@@ -74,12 +74,41 @@ function Maps() {
 
         const infoWindow = new window.google.maps.InfoWindow({
           content: `
-            <div style="width: 250px; font-family: Arial; text-align: center;">
-              <h3 style="margin-bottom: 5px;">${point.title}</h3>
-              <img src="${point.image}" style="width: 100%; border-radius: 8px; margin-bottom: 6px;" />
-              <p style="font-size: 14px; color: #333;">${point.story}</p>
-            </div>
-          `,
+    <div style="
+      width: 340px;
+      font-family: 'Poppins', Arial, sans-serif;
+      text-align: center;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      background: #fff;
+    ">
+      <div style="position: relative; width: 100%; height: 220px; overflow: hidden;">
+        <div class="carousel" style="display: flex; transition: transform 0.5s ease;">
+          <img src="${point.image}" style="width: 100%; object-fit: cover;" />
+        </div>
+        <button class="prev" style="
+          position: absolute; top: 50%; left: 10px;
+          transform: translateY(-50%);
+          background: rgba(0,0,0,0.4);
+          color: white; border: none; border-radius: 50%;
+          width: 28px; height: 28px; cursor: pointer;
+        ">&lt;</button>
+        <button class="next" style="
+          position: absolute; top: 50%; right: 10px;
+          transform: translateY(-50%);
+          background: rgba(0,0,0,0.4);
+          color: white; border: none; border-radius: 50%;
+          width: 28px; height: 28px; cursor: pointer;
+        ">&gt;</button>
+      </div>
+
+      <div style="padding: 12px 16px;">
+        <h3 style="margin-bottom: 8px; font-size: 20px; font-weight: 600; color: #222;">${point.title}</h3>
+        <p style="font-size: 15px; color: #555; line-height: 1.5;">${point.story}</p>
+      </div>
+    </div>
+  `,
         });
 
         marker.addListener("click", () => {
