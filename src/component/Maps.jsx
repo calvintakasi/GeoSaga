@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import storyPoints from "../data/storyPoints";
 
 function Maps() {
   const mapRef = useRef(null);
@@ -25,42 +26,6 @@ function Maps() {
         mapId: "DEMO_MAP_ID",
       });
 
-      const storyPoints = [
-        {
-          title: "Taj Mahal",
-          position: { lat: 27.1751, lng: 78.0421 },
-          story:
-            "Built in 1632 by Mughal Emperor Shah Jahan, the Taj Mahal is a symbol of eternal love.",
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg",
-        },
-        {
-          title: "Gateway of India",
-          position: { lat: 18.921984, lng: 72.834654 },
-          story:
-            "The Gateway of India was built in 1924 and stands as a historic monument facing the Arabian Sea.",
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/4/4e/Gateway_of_India_2019.jpg",
-        },
-        {
-          title: "India Gate",
-          position: { lat: 28.6129, lng: 77.2295 },
-          story:
-            "India Gate is a war memorial located in New Delhi, built in memory of soldiers who lost their lives in World War I.",
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/1/10/India_Gate_in_New_Delhi_03-2016_img3.jpg",
-        },
-        {
-          title: "Charminar",
-          position: { lat: 17.3616, lng: 78.4747 },
-          story:
-            "Charminar is a 16th-century mosque in Hyderabad, known for its four grand arches and minarets.",
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/8/8c/Charminar_Hyderabad_2020.jpg",
-        },
-      ];
-
-      // Popups
       storyPoints.forEach((point) => {
         const marker = new window.google.maps.Marker({
           position: point.position,
@@ -74,41 +39,30 @@ function Maps() {
 
         const infoWindow = new window.google.maps.InfoWindow({
           content: `
-    <div style="
-      width: 340px;
-      font-family: 'Poppins', Arial, sans-serif;
-      text-align: center;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-      background: #fff;
-    ">
-      <div style="position: relative; width: 100%; height: 220px; overflow: hidden;">
-        <div class="carousel" style="display: flex; transition: transform 0.5s ease;">
-          <img src="${point.image}" style="width: 100%; object-fit: cover;" />
-        </div>
-        <button class="prev" style="
-          position: absolute; top: 50%; left: 10px;
-          transform: translateY(-50%);
-          background: rgba(0,0,0,0.4);
-          color: white; border: none; border-radius: 50%;
-          width: 28px; height: 28px; cursor: pointer;
-        ">&lt;</button>
-        <button class="next" style="
-          position: absolute; top: 50%; right: 10px;
-          transform: translateY(-50%);
-          background: rgba(0,0,0,0.4);
-          color: white; border: none; border-radius: 50%;
-          width: 28px; height: 28px; cursor: pointer;
-        ">&gt;</button>
-      </div>
-
-      <div style="padding: 12px 16px;">
-        <h3 style="margin-bottom: 8px; font-size: 20px; font-weight: 600; color: #222;">${point.title}</h3>
-        <p style="font-size: 15px; color: #555; line-height: 1.5;">${point.story}</p>
-      </div>
-    </div>
-  `,
+            <div style="
+              width: 340px;
+              font-family: 'Poppins', Arial, sans-serif;
+              text-align: center;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+              background: #fff;
+            ">
+              <div style="position: relative; width: 100%; height: 220px; overflow: hidden;">
+                <div class="carousel" style="display: flex; transition: transform 0.5s ease;">
+                  <img src="${point.image}" style="width: 100%; object-fit: cover;" />
+                </div>
+              </div>
+              <div style="padding: 12px 16px;">
+                <h3 style="margin-bottom: 8px; font-size: 20px; font-weight: 600; color: #222;">
+                  ${point.title}
+                </h3>
+                <p style="font-size: 15px; color: #555; line-height: 1.5;">
+                  ${point.story}
+                </p>
+              </div>
+            </div>
+          `,
         });
 
         marker.addListener("click", () => {
@@ -119,7 +73,6 @@ function Maps() {
 
     loadGoogleMaps();
 
-    // Cleanup
     return () => {
       if (window.google && window.initMap) {
         delete window.initMap;
@@ -132,12 +85,9 @@ function Maps() {
       <h2 className="text-3xl font-bold mb-2 text-gray-800">
         Storytelling Map
       </h2>
-
       <p className="text-gray-600 mb-6 text-lg">
         Explore the world through stories pinned across every location.
       </p>
-
-      {/* Google Map */}
       <div
         ref={mapRef}
         style={{
