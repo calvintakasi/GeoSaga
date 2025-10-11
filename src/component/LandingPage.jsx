@@ -39,17 +39,38 @@ const LandingPage = () => {
           Start Exploring 🚀
         </motion.button>
 
-        {/* Floating clouds background */}
-        <img
-          src="https://png.pngtree.com/png-clipart/20230909/original/pngtree-white-cartoon-cloud-png-image_11100104.png"
-          alt="cloud"
-          className="absolute top-10 left-10 w-32 opacity-30 animate-bounce"
-        />
-        <img
-          src="https://png.pngtree.com/png-clipart/20230909/original/pngtree-white-cartoon-cloud-png-image_11100104.png"
-          alt="cloud"
-          className="absolute top-20 right-16 w-40 opacity-40 animate-bounce"
-        />
+        {/* Stat Section */}
+        <h2 className="text-4xl font-bold text-[#ff7f50] mb-10 drop-shadow-[1px_1px_0_#fff]">
+          Our Growing World 🌍
+        </h2>
+        <div className="flex flex-wrap justify-center gap-16">
+          {/* Stat 1 */}
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-white text-3xl shadow-md">
+              📍
+            </div>
+            <h3 className="text-3xl font-bold mt-4 text-[#222]">50+</h3>
+            <p className="text-lg text-[#555]">Landmarks</p>
+          </div>
+
+          {/* Stat 2 */}
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-white text-3xl shadow-md">
+              ⛰️
+            </div>
+            <h3 className="text-3xl font-bold mt-4 text-[#222]">28</h3>
+            <p className="text-lg text-[#555]">States</p>
+          </div>
+
+          {/* Stat 3 */}
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-400 to-pink-400 text-white text-3xl shadow-md">
+              📸
+            </div>
+            <h3 className="text-3xl font-bold mt-4 text-[#222]">100+</h3>
+            <p className="text-lg text-[#555]">Stories</p>
+          </div>
+        </div>
       </section>
 
       {/* 💡 About Section */}
@@ -62,7 +83,6 @@ const LandingPage = () => {
           with imagination. Explore landmarks, click on cartoonized markers, and
           reveal the stories behind each place — from history to hidden legends!
         </p>
-
         <div className="mt-10 flex flex-wrap justify-center gap-8">
           {[
             { emoji: "🗺️", text: "Interactive Map" },
