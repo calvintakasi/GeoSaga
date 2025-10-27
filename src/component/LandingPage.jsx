@@ -76,11 +76,11 @@ const LandingPage = () => {
       {/* 💡 About Section */}
       <section className="py-20 px-6 text-center bg-[#fff0d5]">
         <h2 className="text-4xl font-bold text-[#ff7f50] mb-6 drop-shadow-[1px_1px_0_#fff]">
-          What is StoryWorld?
+          What is GeoSaga?
         </h2>
         <p className="max-w-3xl mx-auto text-lg text-[#444]">
-          StoryWorld is an interactive storytelling map that blends geography
-          with imagination. Explore landmarks, click on cartoonized markers, and
+          GeoSaga is an interactive storytelling map that blends geography with
+          imagination. Explore landmarks, click on cartoonized markers, and
           reveal the stories behind each place — from history to hidden legends!
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-8">
@@ -130,20 +130,6 @@ const LandingPage = () => {
             </motion.div>
           ))}
         </div>
-      </section>
-
-      {/* 🗺️ Map Section */}
-      <section
-        id="map-section"
-        className="relative py-20 bg-[#d6f5ff] text-center"
-      >
-        <h2 className="text-4xl font-bold text-[#ff7f50] mb-6">
-          🌍 Explore the Map
-        </h2>
-        <p className="text-lg text-[#444] mb-10 max-w-3xl mx-auto">
-          Click on any landmark to reveal its story and image — all in a
-          beautiful cartoonized popup.
-        </p>
       </section>
     </div>
   );

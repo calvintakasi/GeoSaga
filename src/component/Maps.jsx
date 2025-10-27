@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import ReactDOMServer from "react-dom/server";
 import storyPoints from "../data/storyPoints";
+import Popup from "./Popup";
 
 function Maps() {
   const mapRef = useRef(null);
@@ -28,30 +30,12 @@ function Maps() {
 
       const styledMapType = new window.google.maps.StyledMapType(
         [
-          {
-            elementType: "geometry",
-            stylers: [{ color: "#f2efe9" }],
-          },
-          {
-            elementType: "labels.text.fill",
-            stylers: [{ color: "#333333" }],
-          },
-          {
-            featureType: "water",
-            stylers: [{ color: "#aee0f4" }],
-          },
-          {
-            featureType: "landscape.natural",
-            stylers: [{ color: "#e2f0cb" }],
-          },
-          {
-            featureType: "road",
-            stylers: [{ color: "#f8d49d" }],
-          },
-          {
-            featureType: "poi.park",
-            stylers: [{ color: "#b8e986" }],
-          },
+          { elementType: "geometry", stylers: [{ color: "#f2efe9" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#333333" }] },
+          { featureType: "water", stylers: [{ color: "#aee0f4" }] },
+          { featureType: "landscape.natural", stylers: [{ color: "#e2f0cb" }] },
+          { featureType: "road", stylers: [{ color: "#f8d49d" }] },
+          { featureType: "poi.park", stylers: [{ color: "#b8e986" }] },
         ],
         { name: "Cartoon" }
       );
@@ -59,47 +43,24 @@ function Maps() {
       map.mapTypes.set("cartoon", styledMapType);
       map.setMapTypeId("cartoon");
 
-      // cartoon markers
       storyPoints.forEach((point) => {
         const marker = new window.google.maps.Marker({
           position: point.position,
           map,
           title: point.title,
           icon: {
-            url: "https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png",
+            url: "https://maps.google.com/mapfiles/kml/paddle/red-circle.png",
             scaledSize: new window.google.maps.Size(45, 45),
           },
         });
 
-        // cartoon-styled popup
+        // Render React component to HTML string
+        const contentString = ReactDOMServer.renderToString(
+          <Popup title={point.title} image={point.image} story={point.story} />
+        );
+
         const infoWindow = new window.google.maps.InfoWindow({
-          content: `
-          <div style="
-            width: 340px;
-            font-family: 'Comic Neue', 'Poppins', cursive;
-            text-align: center;
-            border-radius: 20px;
-            border: 3px solid #333;
-            background: #fffbe6;
-            box-shadow: 5px 5px 0 #333;
-            overflow: hidden;
-            position: relative;
-          ">
-            <div style="background:#fce38a; padding: 10px;">
-              <h3 style="font-size:22px; margin:0; color:#333; font-weight:700;">
-                ${point.title}
-              </h3>
-            </div>
-            <img src="${point.image}" style="width:100%;height:180px;object-fit:cover;border-bottom:3px solid #333;"/>
-            <p style="padding:12px 16px;font-size:15px;color:#333;line-height:1.5;margin:0;">
-              ${point.story}
-            </p>
-            <div style="position:absolute;bottom:-20px;left:30px;width:0;height:0;
-                border-top:20px solid #fffbe6;
-                border-left:20px solid transparent;
-                border-right:20px solid transparent;
-                transform:rotate(15deg);"></div>
-          </div>`,
+          content: contentString,
         });
 
         marker.addListener("click", () => {
@@ -125,27 +86,17 @@ function Maps() {
         fontFamily: "'Comic Neue', 'Poppins', cursive",
       }}
     >
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h2
-          className="text-5xl font-bold mb-3"
-          style={{
-            color: "#333",
-            textShadow: "3px 3px 0 #fff, 5px 5px 0 #333",
-          }}
-        >
-          🌍 Storytelling Map
+      <section id="map-section" className="relative py-20 text-center">
+        <h2 className="text-4xl font-bold text-[#ff7f50] mb-6">
+          🌍 Explore the Map
         </h2>
-        <p
-          className="text-lg font-semibold"
-          style={{ color: "#444", maxWidth: "600px", margin: "0 auto" }}
-        >
-          Discover India's famous landmarks in a fun, cartoon world filled with
-          stories and adventures!
+        <p className="text-lg text-[#444] mb-10 max-w-3xl mx-auto">
+          Click on any landmark to reveal its story and image.
+          <br />
+          Discover historical facts, hidden tales, and more as you explore.
         </p>
-      </div>
+      </section>
 
-      {/* Google Map */}
       <div
         ref={mapRef}
         style={{
